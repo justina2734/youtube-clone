@@ -1,0 +1,19 @@
+{
+  "name": "youtube-clone",
+  "version": "1.0.0",
+  "description": "The best way to watch a video.",
+  "main": "index.js",  /*프로젝트의 대표 파일이 무엇인지 알려줌*/
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/justina2734/youtube-clone.git"
+  },
+  "author": "justina",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/justina2734/youtube-clone/issues"
+  },
+  "homepage": "https://github.com/justina2734/youtube-clone#readme"
+}
