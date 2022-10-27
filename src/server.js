@@ -5,19 +5,33 @@ const PORT = 4000;
 
 const app = express();
 
-const gossipMiddleware = (req, res, next) => {
-    console.log(`Someone is going to ${req.url}`);
+const loggerMiddleware = (req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
     next();
 }
 
-const handleLogin = (req, res) => {
-    return res.send("Login here.");
+const privateMiddleware = (req, res, next) => {
+    const url = req.url;
+    if(url === "/protected"){
+        return res.send("<h1>Not Allowed</h1>")
+    }
+    console.log("allowed, you may continue")
+    next();
 }
+const handleLogin = (req, res) => {
+    return res.send("I love middlewares");
+};
 
-app.get("/", gossipMiddleware, (req, res) => {return res.end(); } )
-app.get("/login", handleLogin);
-/*() => 이건 함수를 보내는 역할을 함 이게 없으면 실행이 되지 않기 때문에 꼭 필요함
-const handleHome = (req, res) => console.log("somebody is trying to go home.")
+const handleProtected = (req, res) => {
+    return res.send("Welcome to the private lounge")
+};
+
+app.use(loggerMiddleware);
+app.use(privateMiddleware);
+app.get("/", handleLogin);
+/*middleware를 use 하는게 먼저오고 그 다음에 url의 get이 와야함*/
+/* () => 이건 함수를 보내는 역할을 함 이게 없으면 실행이 되지 않기 때문에 꼭 필요함
+const handleHome = (req, res) => console.log("someone is trying to go home.")
 app.get("/",handleHome)
 주석 위에 있는 걸 inner function이라고 하는데 이건 이 위 두줄과 같음*/
 
