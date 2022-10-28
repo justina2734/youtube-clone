@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The best way to watch a video.",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"  /*콘솔에 script 전체를 입력하게 하는 대신에 dev라는 별명을 주는 것 그렇기 때문에 터미널에도 npm run dev만 입력할 수 있는것*/
+    "dev": "nodemon --exec babel-node src/server.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,8 @@
   },
   "homepage": "https://github.com/justina2734/youtube-clone#readme",
   "dependencies": {
-    "express": "^4.18.2" /*dependencies는 프로젝트가 돌아가기 위해 필요한 package들*/
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "@babel/core": "^7.19.6",
