@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "The best way to watch a video.",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/init.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   "homepage": "https://github.com/justina2734/youtube-clone#readme",
   "dependencies": {
     "express": "^4.18.2",
+    "mongoose": "^6.7.2",
     "morgan": "^1.10.0",
     "pug": "^3.0.2"
   },
