@@ -2,7 +2,7 @@ import "./db"; /*서버를 mongo에 연결*/
 import video from "./models/Video";
 import app from "./server"
 
-const PORT = 9999;
+const PORT = 4000;
 
 const handleListening = () => 
     console.log(`Server listening on port http://localhost:${PORT}🧚‍♀️`);

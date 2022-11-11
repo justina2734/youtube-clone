@@ -1,22 +1,32 @@
 
 import Video from "../models/Video";
 
-export const home = (req, res) => {
-    console.log("Start");
-    Video.find({}, (error, videos) => {
+/*Video.find({}, (error, videos) => {
         console.log("Finished");
-        return res.render("home", { pageTitle: "Home", videos:[]});
-    });
-    console.log("I finish first");
+        
+    });*/
+
+export const home = async(req, res) => {
+    const videos = await Video.find({});
+    console.log(videos);
+    return res.render("home", { pageTitle: "Home", videos});
 };
 
-export const watch = (req, res) => {
+export const watch = async(req, res) => {
     const id = req.params.id;
-    return res.render("watch", {pageTitle:`Watching`});
+    const video = await Video.findById(id);
+    if(!video){
+        return res.render("404", {pageTitle:"Video not found."});
+    }
+    return res.render("watch", {pageTitle:video.title, video});
 };
-export const getEdit = (req, res) => {
+export const getEdit = async(req, res) => {
     const id = req.params.id;
-    return res.render("edit", {pageTitle:`Editing`})
+    const video = await Video.findById(id);
+    if(!video){
+        return res.render("404", {pageTitle:"Video not found."});
+    }
+    return res.render("watch", {pageTitle:`Edit:${ video.title}`, video});
 };
 export const postEdit = (req, res) => {
     const id = req.params.id;
@@ -27,7 +37,19 @@ export const postEdit = (req, res) => {
 export const getUpload = (req, res) => {
     return res.render("upload", {pageTitle:"Upload Video"});
 }
-export const postUpload = (req, res) => {
-    console.log(req.body);
+export const postUpload = async(req, res) => {
+    const {title, description, hashtags}=req.body;
+    try{
+     await Video.create({
+        title,
+        description,
+        createAt:Date.now(),
+        hashtags:hashtags.split(",").map((word) => `#${word}`),
+    });
     return res.redirect("/");
+} catch(error){
+    console.log(error);
+    return res.render("upload", {pageTitle:"Upload Video", errorMessage:error._message,
+});
+}
 };
