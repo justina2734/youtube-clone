@@ -1,0 +1,9 @@
+extends base.pug
+
+block content 
+   form(method="GET")
+         input(placeholder="Search by title", type="text", name="Keyword")
+         input(type="submit", value="Search now")
+   div 
+      each video in videos 
+          +video(video)
