@@ -30,9 +30,7 @@ export const postEdit = async (req, res) => {
         return res.render("404", {pageTitle:"Video not found."});
     }
     await Video.findByIdAndUpdate(id,{
-        title, description, hashtags:hashtags
-        .split(",")
-        .map((word)=> (word.startsWith("#")?word:`#${word}`)),
+        title, description, hashtags:hashtags,
         hashtags:Video.formatHashtags(hashtags),
     });
     return res.redirect(`/videos/${id}`);
@@ -47,7 +45,6 @@ export const postUpload = async(req, res) => {
      await Video.create({
         title,
         description,
-        createAt:Date.now(),
         hashtags:Video.formatHashtags(hashtags),
     });
     return res.redirect("/");
@@ -69,9 +66,9 @@ export const search = async (req, res) => {
     if(keyword){
          videos = await Video.find({
             title:{
-                $regex:new RegExp(`${keyword}$`, "i"),
+                $regex: new RegExp(`${keyword}$`, "i"),
             },
         });
-        return res.render("search",{pageTitle:"Search", videos});
-    }
+    };
+    return res.render("search",{pageTitle:"Search", videos});
 };
