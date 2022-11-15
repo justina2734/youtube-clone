@@ -1,5 +1,6 @@
 import "./db"; /*서버를 mongo에 연결*/
-import video from "./models/Video";
+import "./models/Video";
+import "./models/User";
 import app from "./server"
 
 const PORT = 4000;
