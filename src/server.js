@@ -1,9 +1,12 @@
 /*아래 네줄이 서버를 만드는 것!*/
 import express from "express";  /*import하지 않으면 express를 쓸 수 없음*/
 import morgan from "morgan";
+import session from "express-session";
+import MongoStore from "connect-mongo"
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import { localsMiddleware } from "./middlewares";
 
 const app = express();
 const logger = morgan("dev");
@@ -12,6 +15,18 @@ app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 app.use(express.urlencoded({extended:true}));
+
+
+app.use(session({
+    secret:process.env.COOKIE_SECRET,
+    resave:false,
+    saveUninitialized:false,
+    store:MongoStore.create({mongoUrl:process.env.DB_URL})
+})
+);
+
+
+app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter)

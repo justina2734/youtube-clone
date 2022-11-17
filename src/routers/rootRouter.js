@@ -1,5 +1,5 @@
 import express from "express";
-import {getJoin, postJoin, login} from "../controllers/userController";/*default export 를 안쓰면 이런식으로 import 함*/
+import {getJoin, postJoin, getLogin, postLogin} from "../controllers/userController";/*default export 를 안쓰면 이런식으로 import 함*/
 import {home, search} from "../controllers/videoController";/*../는 지금 있는 폴더에서 벗어난다는 의미, ./는 지금의 장소를 의미*/
 
 
@@ -8,7 +8,7 @@ const rootRouter = express.Router();/*프로젝트에 있는 모든 파일은 �
 
 rootRouter.get("/", home);
 rootRouter.route("/join").get(getJoin).post(postJoin);
-rootRouter.get("/login", login);
+rootRouter.route("/login").get(getLogin).post(postLogin);
 rootRouter.get("/search", search);
 
 export default rootRouter; /* 이런식으로 디폴트로 익스포트 할때는 내가 원하는 어떤 이름이던지 임포트 가능. 
