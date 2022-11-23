@@ -5,6 +5,7 @@ import session from "express-session";
 import MongoStore from "connect-mongo"
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
+import apiRouter from "./routers/apiRouter";
 import videoRouter from "./routers/videoRouter";
 import { localsMiddleware } from "./middlewares";
 
@@ -28,10 +29,11 @@ app.use(session({
 
 app.use(localsMiddleware);
 app.use("/uploads", express.static("uploads"));
-app.use("/static", express.static("assets"));
+app.use("/assets", express.static("assets"));
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
-app.use("/users", userRouter)
+app.use("/users", userRouter);
+app.use("/api", apiRouter);
 
 /*middleware를 use 하는게 먼저오고 그 다음에 url의 get이 와야함*/
 /* () => 이건 함수를 보내는 역할을 함 이게 없으면 실행이 되지 않기 때문에 꼭 필요함

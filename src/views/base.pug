@@ -2,33 +2,12 @@ doctype html
 html(lang="ko")
     head   
         title #{pageTitle} | #{siteName}
-        link(rel="stylesheet" href="https://unpkg.com/mvp.css@1.12/mvp.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css")
         link(rel="stylesheet", href="/static/css/styles.css")
     body 
-        header
-             h1=pageTitle /*h1에 =을 붙이고 variable을 쓰면 텍스트가 아닌 variable로 인식이 됨. #{pageTitle}로 적는 것과 같음.다만 다른 텍스트와 섞어 쓰지 않기때문에 이렇게 쓰지 않음*/
-             nav 
-                ul 
-                   li 
-                      a(href="/") Home
-                   if loggedIn 
-                      li 
-                         a(href="/videos/upload") Upload 
-                      li
-                         a(href=`/users/${loggedInUser._id}`) My Profile
-                      li 
-                         a(href="/users/edit") Edit Profile
-                      li 
-                         a(href="/users/logout") Log Out
-                   else 
-                      li 
-                         a(href="/join") Join
-                      li 
-                         a(href="/login") Login
-                   li 
-                      a(href="/search") Search
+        include partials/header
     main
-             block content
+        block content
     include partials/footer.pug
-
-    script(src="/static/js/main.js")
+    script(src="/static/js/main.js") 
+    block scripts
