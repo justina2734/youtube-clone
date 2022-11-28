@@ -4,9 +4,9 @@
   "description": "The best way to watch a video.",
   "scripts": {
     "start": "node build/init.js",
-    "build":"npm run build:server && npm run build:assets",
+    "build": "npm run build:server && npm run build:assets",
     "build:server": "babel src -d build",
-    "build:assets":"webpack --mode=production",
+    "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
     "dev:assets": "webpack --mode=development -w"
   },
@@ -34,7 +34,9 @@
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^2.6.7",
     "pug": "^3.0.2",
-    "regenerator-runtime": "^0.13.11"
+    "regenerator-runtime": "^0.13.11",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
@@ -47,8 +49,6 @@
     "nodemon": "^2.0.20",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
-    "style-loader": "^3.3.1",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.0"
+    "style-loader": "^3.3.1"
   }
 }
