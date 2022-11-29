@@ -10,8 +10,8 @@ import apiRouter from "./routers/apiRouter";
 import videoRouter from "./routers/videoRouter";
 import { localsMiddleware } from "./middlewares";
 
-var app = (0, _express["default"])();
-var logger = (0, _morgan["default"])("dev");
+var app = (0, express["default"]);
+var logger = (0, morgan["default"]);
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
