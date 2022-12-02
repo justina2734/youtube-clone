@@ -142,16 +142,20 @@ export const postEdit = async(req, res) => {
     body: {name, email, username, location},
     file,
    } = req;
+   const isHeroku = process.env.NOD_ENV === "production";
    console.log(file);
    const updatedUser = await User.findByIdAndUpdate(
     _id, {
-        avatarUrl: file ? file.path : avatarUrl, name, email, username, location,
+        avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl, name, email, username, location,
     },
     {new: true}
    );
    req.session.user = updatedUser;
    return res.redirect("/users/edit");
 };
+
+
+
 
 export const getChangePassword = (req, res) => {
     if (req.session.user.socialOnly === true) {
